@@ -2,6 +2,19 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - Flows Page Implementation
+
+### Changes
+- Implemented `src/pages/flows/FlowsPage.tsx` using `DataTable`.
+- Created `src/hooks/useFlows.ts` hook for fetching enriched flows from `/api/v1/flows`.
+- Configured routing in `App.tsx` to mount `FlowsPage` at `/flows`.
+- Added columns: Timestamp, Source, Destination, Protocol, Threat Score, Packets, and Bytes (with auto-formatting).
+- Marked Task **U2.3** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U2.3**: Developed the primary network traffic view. It utilizes the `useFlows` hook to fetch data and displays it in a responsive table with threat score color-coding via `ThreatBadge`.
+- **Usage**: Navigate to `/flows` in the application to view the table.
+
 ## [2026-04-04] - ThreatBadge Component Implementation
 
 ### Changes

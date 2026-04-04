@@ -22,7 +22,7 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 
 - [x] **U2.1** Build generic `<DataTable>` component with TanStack Table ✓
 - [x] **U2.2** Add `<ThreatBadge score={n} />` component ✓
-- [ ] **U2.3** **Flows page** — columns: flow_id, src_ip:port → dst_ip:port, protocol, etc.
+- [x] **U2.3** **Flows page** — columns: flow_id, src_ip:port → dst_ip:port, protocol, etc. ✓
 - [ ] **U2.4** **Threats page** — reuse Flows table filtered to `is_malicious=true`
 - [ ] **U2.5** **DNS page** — columns: timestamp, query name, qtype, rcode
 - [ ] **U2.6** **TLS page** — columns: timestamp, SNI, version, cipher
