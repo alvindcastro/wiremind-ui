@@ -2,6 +2,19 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - ICMP Page Implementation
+
+### Changes
+- Implemented `src/pages/icmp/ICMPPage.tsx` using `DataTable`.
+- Created `src/hooks/useICMP.ts` hook for fetching enriched ICMP events from `/api/v1/icmp`.
+- Configured routing in `App.tsx` to mount `ICMPPage` at `/icmp`.
+- Added columns: Timestamp, Source IP, Destination IP, Type, and Code.
+- Marked Task **U2.8** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U2.8**: Developed the ICMP traffic view. It utilizes the `useICMP` hook to fetch data and displays it in a responsive table, showing ICMP type/code and source/destination metadata.
+- **Usage**: Navigate to `/icmp` in the sidebar to view historical ICMP messages.
+
 ## [2026-04-04] - HTTP Page Implementation
 
 ### Changes
