@@ -2,6 +2,19 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - DNS Page Implementation
+
+### Changes
+- Implemented `src/pages/dns/DNSPage.tsx` using `DataTable`.
+- Created `src/hooks/useDNS.ts` hook for fetching enriched DNS events from `/api/v1/dns`.
+- Configured routing in `App.tsx` to mount `DNSPage` at `/dns`.
+- Added columns: Timestamp, Query Name, QType, and Responses.
+- Marked Task **U2.5** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U2.5**: Developed the DNS traffic view. It utilizes the `useDNS` hook to fetch data and displays it in a responsive table, showing domain queries and their associated results.
+- **Usage**: Navigate to `/dns` in the sidebar to view historical DNS traffic.
+
 ## [2026-04-04] - Threats Page Implementation
 
 ### Changes
