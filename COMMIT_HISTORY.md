@@ -2,6 +2,20 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - Vite Proxy Configuration & Project Plumbing
+
+### Changes
+- Configured Vite dev proxy in `vite.config.ts` to redirect `/api` requests to `http://localhost:8765`.
+- Installed and configured core dependencies: `vite`, `react`, `react-dom`, `react-router-dom`, `tailwindcss`, `postcss`, and `autoprefixer`.
+- Initialized Tailwind CSS and PostCSS configuration files.
+- Updated `package.json` with standard Vite scripts (`dev`, `build`, `preview`).
+- Marked Task **U1.6** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U1.6**: Vite Proxy. This allows the frontend to communicate with the local Go backend during development without CORS issues.
+- **Task U1.1 & U1.2**: Ensured all necessary UI plumbing (React, Tailwind) is correctly installed and configured.
+- **Usage**: Run `npm run dev` to start the development server with the API proxy active.
+
 ## [2026-04-04] - API Codegen & Client Scaffold
 
 ### Changes
