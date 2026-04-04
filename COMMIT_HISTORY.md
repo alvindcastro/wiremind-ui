@@ -2,6 +2,17 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - TanStack Query Setup
+
+### Changes
+- Installed `@tanstack/react-query`.
+- Configured `QueryClient` and wrapped the application with `QueryClientProvider` in `App.tsx`.
+- Marked Task **U1.10** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U1.10**: Integrated TanStack Query for server-state management. This will be used to fetch and cache data from the backend API.
+- **Usage**: Use `useQuery` or `useMutation` hooks from `@tanstack/react-query` within components.
+
 ## [2026-04-04] - React Router & Shell Layout
 
 ### Changes

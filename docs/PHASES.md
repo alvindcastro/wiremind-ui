@@ -14,7 +14,7 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 - [x] **U1.7** Add CORS middleware to Go server (Done in `internal/api/server.go`) ✓
 - [x] **U1.8** Install React Router v6; create Shell layout (sidebar + header + `<Outlet />`) ✓
 - [x] **U1.9** Add placeholder routes for all 10 pages; confirm navigation works ✓
-- [ ] **U1.10** Add TanStack Query `QueryClientProvider` to `App.tsx`
+- [x] **U1.10** Add TanStack Query `QueryClientProvider` to `App.tsx` ✓
 - [x] **U1.11** Configure `.gitignore` and project cleanup ✓
 
 ## Phase 2 — Core Data Tables
