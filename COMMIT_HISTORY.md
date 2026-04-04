@@ -2,6 +2,19 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - HTTP Page Implementation
+
+### Changes
+- Implemented `src/pages/http/HTTPPage.tsx` using `DataTable`.
+- Created `src/hooks/useHTTP.ts` hook for fetching enriched HTTP events from `/api/v1/http`.
+- Configured routing in `App.tsx` to mount `HTTPPage` at `/http`.
+- Added columns: Timestamp, Method, Host, Path, and User Agent.
+- Marked Task **U2.7** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U2.7**: Developed the HTTP traffic view. It utilizes the `useHTTP` hook to fetch data and displays it in a responsive table, showing method, host, path, and user-agent metadata.
+- **Usage**: Navigate to `/http` in the sidebar to view historical HTTP requests.
+
 ## [2026-04-04] - TLS Page Implementation
 
 ### Changes
