@@ -157,7 +157,7 @@ All active steps must pass before a PR can be merged.
 Once CI is green:
 
 ```bash
-gh pr merge <pr-number> --squash --delete-branch
+gh pr merge <pr-number> --squash --delete-branch --admin
 ```
 
 - `--squash` collapses all commits into one clean commit on `main`.
