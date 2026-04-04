@@ -19,12 +19,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/alvindcastro/wiremind-ui/issues"
   },
   "homepage": "https://github.com/alvindcastro/wiremind-ui#readme",
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^25.5.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -38,6 +39,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.96.2",
+    "@tanstack/react-table": "^8.21.3",
     "clsx": "^2.1.1",
     "lucide-react": "^1.7.0",
     "openapi-fetch": "^0.17.0",
