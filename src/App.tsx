@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Shell from './components/layout/Shell';
 import FlowsPage from './pages/flows/FlowsPage';
+import ThreatsPage from './pages/threats/ThreatsPage';
 
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTable } from './components/ui/DataTable';
@@ -62,7 +63,7 @@ export default function App() {
           <Route path="/" element={<Shell />}>
             <Route index element={<Dashboard />} />
             <Route path="flows" element={<FlowsPage />} />
-            <Route path="threats" element={<Placeholder title="Threats" />} />
+            <Route path="threats" element={<ThreatsPage />} />
             <Route path="dns" element={<Placeholder title="DNS" />} />
             <Route path="tls" element={<Placeholder title="TLS" />} />
             <Route path="http" element={<Placeholder title="HTTP" />} />

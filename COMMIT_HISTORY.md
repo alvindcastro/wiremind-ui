@@ -2,6 +2,18 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - Threats Page Implementation
+
+### Changes
+- Implemented `src/pages/threats/ThreatsPage.tsx` by reusing the `DataTable` structure from `FlowsPage`.
+- Created `src/hooks/useThreats.ts` to fetch malicious findings from `/api/v1/threats`.
+- Configured routing in `App.tsx` to mount `ThreatsPage` at `/threats`.
+- Marked Task **U2.4** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U2.4**: Developed the Threats view, which provides an aggregated view of malicious flows and high-threat score findings. It leverages the generic `DataTable` and the newly created `useThreats` hook.
+- **Usage**: Navigate to `/threats` in the sidebar to view all detected malicious traffic.
+
 ## [2026-04-04] - Flows Page Implementation
 
 ### Changes
