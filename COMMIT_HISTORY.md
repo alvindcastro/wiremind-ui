@@ -2,6 +2,30 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - Generic DataTable Implementation
+
+### Changes
+- Installed `@tanstack/react-table` for headless table logic.
+- Implemented generic `src/components/ui/DataTable.tsx` component.
+- Added low-level table primitives in `src/components/ui/Table.tsx` (following shadcn/ui patterns).
+- Configured `tsconfig.json` and `tsconfig.node.json` for React, Vite, and path aliases.
+- Fixed Tailwind CSS v4 / PostCSS configuration issues.
+- Updated `package.json` to `"type": "module"`.
+- Added `src/vite-env.d.ts` for environment variable type safety.
+- Integrated a `DataTable` demo into the Dashboard for verification.
+- Marked Task **U2.1** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U2.1**: Developed a reusable `<DataTable />` component that takes `columns` and `data` props. This component will be the foundation for all data-view pages in Phase 2.
+- **Usage**:
+  ```tsx
+  import { DataTable } from '@/components/ui/DataTable';
+  import { ColumnDef } from '@tanstack/react-table';
+
+  const columns: ColumnDef<MyData>[] = [...];
+  <DataTable columns={columns} data={myData} />
+  ```
+
 ## [2026-04-04] - Project Cleanup & Git Configuration
 
 ### Changes
