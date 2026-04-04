@@ -1,0 +1,31 @@
+{
+  "name": "wiremind-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate:api": "openapi-typescript ../wiremind/docs/openapi.yaml -o src/api/schema.d.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvindcastro/wiremind-ui.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alvindcastro/wiremind-ui/issues"
+  },
+  "homepage": "https://github.com/alvindcastro/wiremind-ui#readme",
+  "devDependencies": {
+    "openapi-typescript": "^7.13.0"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.17.0"
+  }
+}
