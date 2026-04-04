@@ -1,0 +1,26 @@
+import { useQuery } from '@tanstack/react-query';
+import { client } from '@/api/client';
+import { components } from '@/api/schema';
+
+type EnrichedFlow = components['schemas']['EnrichedFlow'];
+
+export function useFlows(params?: {
+  limit?: number;
+  job_id?: string;
+  src_ip?: string;
+  dst_ip?: string;
+  protocol?: string;
+}) {
+  return useQuery({
+    queryKey: ['flows', params],
+    queryFn: async () => {
+      const { data, error } = await client.GET('/flows', {
+        params: {
+          query: params,
+        },
+      });
+      if (error) throw error;
+      return data as EnrichedFlow[];
+    },
+  });
+}
