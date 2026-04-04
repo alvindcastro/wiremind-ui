@@ -1,0 +1,63 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: cd-main
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Uncomment when build is configured
+      # - name: Build
+      #   run: npm run build
+      #   env:
+      #     VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+      # --- Deployment target (pick one and uncomment) ---
+
+      # Option A: Deploy static build to GitHub Pages
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v4
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./dist
+
+      # Option B: Deploy to Vercel
+      # - name: Deploy to Vercel
+      #   run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      # Option C: Deploy to a VPS / server via SSH
+      # - name: Deploy via SSH
+      #   uses: appleboy/ssh-action@v1
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USER }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     script: |
+      #       cd /var/www/wiremind-ui
+      #       git pull
+      #       npm ci
+      #       npm run build
+
+      - name: Placeholder — deployment not yet configured
+        run: echo "Build and deploy steps are commented out pending tooling setup."
