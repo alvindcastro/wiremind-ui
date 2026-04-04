@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Uncomment when tsconfig.json is added
+      # - name: Type check
+      #   run: npm run typecheck
+
+      # Uncomment when ESLint is configured
+      # - name: Lint
+      #   run: npm run lint
+
+      # Uncomment when Vite build is set up
+      # - name: Build
+      #   run: npm run build
+
+      # Uncomment when a test framework is added (Vitest recommended)
+      # - name: Test
+      #   run: npm run test

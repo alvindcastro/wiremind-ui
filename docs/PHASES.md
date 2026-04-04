@@ -8,8 +8,8 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 - [x] **U1.1** Create `wiremind-ui` repo, init Vite + React + TypeScript ✓
 - [x] **U1.2** Install and configure Tailwind CSS + shadcn/ui (dark mode default) ✓
 - [x] **U1.3** Install `openapi-typescript` + `openapi-fetch`; add `generate:api` npm script ✓
-- [ ] **U1.4** Run codegen; commit `src/api/schema.d.ts`
-- [ ] **U1.5** Write `src/api/client.ts` — `createClient<paths>` with base URL
+- [x] **U1.4** Run codegen; commit `src/api/schema.d.ts` ✓
+- [x] **U1.5** Write `src/api/client.ts` — `createClient<paths>` with base URL ✓
 - [ ] **U1.6** Configure Vite dev proxy: `/api → http://localhost:8765`
 - [x] **U1.7** Add CORS middleware to Go server (Done in `internal/api/server.go`) ✓
 - [ ] **U1.8** Install React Router v6; create Shell layout (sidebar + header + `<Outlet />`)
