@@ -34,6 +34,7 @@ coverage/
 # Project Specific
 docs/brainstorm.txt
 docs/code.txt
+-Force/
 
 # Junie
 .junie/

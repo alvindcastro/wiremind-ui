@@ -2,6 +2,16 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - Project Cleanup & Git Configuration
+
+### Changes
+- Updated `.gitignore` with project-specific exclusions (JetBrains, OS, Node.js, Vite, and docs).
+- Removed redundant `-Force` directory created during initialization.
+- Marked Task **U1.11** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U1.11**: Finalized Phase 1 by ensuring the repository is clean and correctly configured for Git. Standardized the `.gitignore` to prevent environment-specific files from being tracked.
+
 ## [2026-04-04] - TanStack Query Setup
 
 ### Changes
