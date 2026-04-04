@@ -4,6 +4,7 @@ import Shell from './components/layout/Shell';
 
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTable } from './components/ui/DataTable';
+import { ThreatBadge } from './components/ui/ThreatBadge';
 
 const queryClient = new QueryClient();
 
@@ -13,18 +14,24 @@ interface LogEntry {
   timestamp: string;
   level: 'info' | 'warn' | 'error';
   message: string;
+  threat_score: number;
 }
 
 const columns: ColumnDef<LogEntry>[] = [
   { accessorKey: 'timestamp', header: 'Timestamp' },
   { accessorKey: 'level', header: 'Level' },
+  { 
+    accessorKey: 'threat_score', 
+    header: 'Threat Score',
+    cell: ({ getValue }) => <ThreatBadge score={getValue<number>()} />
+  },
   { accessorKey: 'message', header: 'Message' },
 ];
 
 const data: LogEntry[] = [
-  { id: '1', timestamp: '2026-04-04 13:40:01', level: 'info', message: 'System initialized' },
-  { id: '2', timestamp: '2026-04-04 13:45:22', level: 'warn', message: 'High memory usage' },
-  { id: '3', timestamp: '2026-04-04 13:50:10', level: 'error', message: 'Failed to connect to backend' },
+  { id: '1', timestamp: '2026-04-04 13:40:01', level: 'info', message: 'System initialized', threat_score: 0 },
+  { id: '2', timestamp: '2026-04-04 13:45:22', level: 'warn', message: 'High memory usage', threat_score: 5 },
+  { id: '3', timestamp: '2026-04-04 13:50:10', level: 'error', message: 'Failed to connect to backend', threat_score: 9 },
 ];
 
 // Placeholder components for routes

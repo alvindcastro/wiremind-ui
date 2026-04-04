@@ -21,7 +21,7 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 *Goal: all six data-view pages showing live data with column filters.*
 
 - [x] **U2.1** Build generic `<DataTable>` component with TanStack Table ✓
-- [ ] **U2.2** Add `<ThreatBadge score={n} />` component
+- [x] **U2.2** Add `<ThreatBadge score={n} />` component ✓
 - [ ] **U2.3** **Flows page** — columns: flow_id, src_ip:port → dst_ip:port, protocol, etc.
 - [ ] **U2.4** **Threats page** — reuse Flows table filtered to `is_malicious=true`
 - [ ] **U2.5** **DNS page** — columns: timestamp, query name, qtype, rcode
