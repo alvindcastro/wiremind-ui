@@ -25,7 +25,7 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 - [x] **U2.3** **Flows page** — columns: flow_id, src_ip:port → dst_ip:port, protocol, etc. ✓
 - [x] **U2.4** **Threats page** — reuse Flows table filtered to `is_malicious=true` ✓
 - [x] **U2.5** **DNS page** — columns: timestamp, query name, qtype, rcode ✓
-- [ ] **U2.6** **TLS page** — columns: timestamp, SNI, version, cipher
+- [x] **U2.6** **TLS page** — columns: timestamp, SNI, version, cipher ✓
 - [ ] **U2.7** **HTTP page** — columns: timestamp, method, host, path, user_agent
 - [ ] **U2.8** **ICMP page** — columns: timestamp, src_ip, dst_ip, type_name
 
