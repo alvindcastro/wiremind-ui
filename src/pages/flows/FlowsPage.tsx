@@ -3,7 +3,7 @@ import { DataTable } from '@/components/ui/DataTable';
 import { ThreatBadge } from '@/components/ui/ThreatBadge';
 import { useFlows } from '@/hooks/useFlows';
 import { components } from '@/api/schema';
-import { AlertCircle, Loader2 } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 type EnrichedFlow = components['schemas']['EnrichedFlow'];
 
@@ -71,6 +71,15 @@ const columns: ColumnDef<EnrichedFlow>[] = [
 export default function FlowsPage() {
   const { data, isLoading, isError, error } = useFlows();
 
+  if (isError) {
+    return (
+      <div className="flex items-center gap-2 p-4 text-red-500 bg-red-500/10 rounded-md border border-red-500/20">
+        <AlertCircle className="h-5 w-5" />
+        <p>Error loading flows: {(error as Error).message}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       <div>
@@ -80,18 +89,11 @@ export default function FlowsPage() {
         </p>
       </div>
 
-      {isLoading ? (
-        <div className="flex items-center justify-center h-64">
-          <Loader2 className="h-8 w-8 animate-spin text-zinc-500" />
-        </div>
-      ) : isError ? (
-        <div className="flex items-center gap-2 p-4 text-red-500 bg-red-500/10 rounded-md border border-red-500/20">
-          <AlertCircle className="h-5 w-5" />
-          <p>Error loading flows: {(error as Error).message}</p>
-        </div>
-      ) : (
-        <DataTable columns={columns} data={data || []} />
-      )}
+      <DataTable 
+        columns={columns} 
+        data={data || []} 
+        isLoading={isLoading} 
+      />
     </div>
   );
 }
