@@ -2,6 +2,21 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - React Router & Shell Layout
+
+### Changes
+- Installed `react-router-dom` and `lucide-react`.
+- Created `src/components/layout/Shell.tsx` featuring a responsive sidebar with navigation links and a top header.
+- Configured `src/App.tsx` with a standard layout using React Router and `<Outlet />`.
+- Added placeholder routes for Dashboard, Flows, Threats, DNS, TLS, HTTP, ICMP, Jobs, Network Graph, and IOC Config.
+- Created `index.html`, `src/main.tsx`, and `src/index.css` to boot the application.
+- Marked Tasks **U1.8** and **U1.9** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U1.8**: Implemented the core UI shell. The sidebar is collapsible and provides navigation to all primary application modules.
+- **Task U1.9**: Established the routing structure for the entire application, enabling easy feature development in subsequent phases.
+- **Usage**: Use `NavLink` within the sidebar for automatic active link highlighting.
+
 ## [2026-04-04] - Vite Proxy Configuration & Project Plumbing
 
 ### Changes
