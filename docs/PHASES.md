@@ -27,7 +27,7 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 - [x] **U2.5** **DNS page** — columns: timestamp, query name, qtype, rcode ✓
 - [x] **U2.6** **TLS page** — columns: timestamp, SNI, version, cipher ✓
 - [x] **U2.7** **HTTP page** — columns: timestamp, method, host, path, user_agent ✓
-- [ ] **U2.8** **ICMP page** — columns: timestamp, src_ip, dst_ip, type_name
+- [x] **U2.8** **ICMP page** — columns: timestamp, src_ip, dst_ip, type_name ✓
 
 ## Phase 3 — Job Management & SSE
 *Goal: full job lifecycle from submit → watch → view results.*

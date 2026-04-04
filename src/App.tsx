@@ -6,6 +6,7 @@ import ThreatsPage from './pages/threats/ThreatsPage';
 import DNSPage from './pages/dns/DNSPage';
 import TLSPage from './pages/tls/TLSPage';
 import HTTPPage from './pages/http/HTTPPage';
+import ICMPPage from './pages/icmp/ICMPPage';
 
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTable } from './components/ui/DataTable';
@@ -70,7 +71,7 @@ export default function App() {
             <Route path="dns" element={<DNSPage />} />
             <Route path="tls" element={<TLSPage />} />
             <Route path="http" element={<HTTPPage />} />
-            <Route path="icmp" element={<Placeholder title="ICMP" />} />
+            <Route path="icmp" element={<ICMPPage />} />
             <Route path="jobs" element={<Placeholder title="Jobs" />} />
             <Route path="graph" element={<Placeholder title="Network Graph" />} />
             <Route path="config" element={<Placeholder title="IOC Config" />} />
