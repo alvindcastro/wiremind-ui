@@ -2,6 +2,19 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - TLS Page Implementation
+
+### Changes
+- Implemented `src/pages/tls/TLSPage.tsx` using `DataTable`.
+- Created `src/hooks/useTLS.ts` hook for fetching enriched TLS events from `/api/v1/tls`.
+- Configured routing in `App.tsx` to mount `TLSPage` at `/tls`.
+- Added columns: Timestamp, SNI, Version, and Cipher.
+- Marked Task **U2.6** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U2.6**: Developed the TLS traffic view. It utilizes the `useTLS` hook to fetch data and displays it in a responsive table, showing SNI (Server Name Indication), TLS version, and cipher suites.
+- **Usage**: Navigate to `/tls` in the sidebar to view historical TLS handshakes.
+
 ## [2026-04-04] - DNS Page Implementation
 
 ### Changes

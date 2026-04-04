@@ -4,6 +4,7 @@ import Shell from './components/layout/Shell';
 import FlowsPage from './pages/flows/FlowsPage';
 import ThreatsPage from './pages/threats/ThreatsPage';
 import DNSPage from './pages/dns/DNSPage';
+import TLSPage from './pages/tls/TLSPage';
 
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTable } from './components/ui/DataTable';
@@ -66,7 +67,7 @@ export default function App() {
             <Route path="flows" element={<FlowsPage />} />
             <Route path="threats" element={<ThreatsPage />} />
             <Route path="dns" element={<DNSPage />} />
-            <Route path="tls" element={<Placeholder title="TLS" />} />
+            <Route path="tls" element={<TLSPage />} />
             <Route path="http" element={<Placeholder title="HTTP" />} />
             <Route path="icmp" element={<Placeholder title="ICMP" />} />
             <Route path="jobs" element={<Placeholder title="Jobs" />} />
