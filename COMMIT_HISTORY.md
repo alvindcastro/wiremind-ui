@@ -2,6 +2,25 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - ThreatBadge Component Implementation
+
+### Changes
+- Implemented `src/components/ui/ThreatBadge.tsx` component to visualize threat scores.
+- Configured Vitest and `@testing-library/react` for component testing.
+- Added unit tests in `src/components/ui/ThreatBadge.test.tsx` (TDD).
+- Updated `vite.config.ts` with test configurations and path aliases.
+- Integrated `ThreatBadge` into the Dashboard's demo table.
+- Marked Task **U2.2** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U2.2**: Created a `<ThreatBadge />` component that accepts a `score` prop (0-10). It automatically applies color coding: emerald for low (0-3), amber for medium (4-6), and red for high (7-10).
+- **Usage**:
+  ```tsx
+  import { ThreatBadge } from '@/components/ui/ThreatBadge';
+
+  <ThreatBadge score={7} />
+  ```
+
 ## [2026-04-04] - Generic DataTable Implementation
 
 ### Changes
