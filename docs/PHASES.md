@@ -33,7 +33,7 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 - [x] **U2.5** **DNS page** — columns: timestamp, query name, qtype, rcode, answer count. Search bar for domain. Expandable row shows full answers + threat context
 - [x] **U2.6** **TLS page** — columns: timestamp, SNI, version, cipher, is_malicious. Highlight weak ciphers (RC4/export) in amber. Search bar for SNI
 - [x] **U2.7** **HTTP page** — columns: timestamp, method, host, path, user_agent, status_code. Highlight CLI agents. Search bar for host
-- [x] **U2.8** **ICMP page** — columns: timestamp, src_ip, dst_ip, type_name, code, size
+- [x] **U2.8** **ICMP page** — columns: timestamp, src_ip, dst_ip, type_name, code, size (Note: data is nested under `event` in response)
 
 **Deliverable:** All six tables populated with real data. Filters working.
 
@@ -99,10 +99,10 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 - [x] **U7.1** Create `Dockerfile` — multi-stage: `node:20-alpine` builder → `nginx:1.27-alpine` runtime
 - [x] **U7.2** Create `nginx.conf` — SPA fallback, `/api/` proxy to `forensics:8765`, gzip
 - [x] **U7.3** Create `.dockerignore` — exclude `node_modules/`, `dist/`, `.env*`, `.git/`
-- [x] **U7.4** Verify `src/api/client.ts` uses relative `/api` base URL (works for both Vite proxy and nginx proxy)
-- [ ] **U7.5** Add `wiremind-ui` service to `wiremind/docker-compose.yaml`
+- [x] **U7.4** Verify `src/api/client.ts` uses relative `/api/v1` base URL (works for both Vite proxy and nginx proxy)
+- [x] **U7.5** Add `wiremind-ui` service to `wiremind/docker-compose.yaml`
 - [ ] **U7.6** Add `docker-compose.override.yaml` in `wiremind/` for local dev (expose backend port `8765` to host)
-- [ ] **U7.7** Smoke test: build succeeds, image < 50 MB, UI loads at `localhost:3001`, no CORS errors, deep links work
+- [x] **U7.7** Smoke test: build succeeds, image < 50 MB, UI loads at `localhost:3001`, no CORS errors, deep links work
 
 **Deliverable:** `docker compose up` → full stack at `localhost:3001`. No manual steps.
 
@@ -117,7 +117,7 @@ Phase 3  Job management + SSE       ⬜ next
 Phase 4  Dashboard                  ⬜
 Phase 5  Network graph              ⬜
 Phase 6  Config & control           ⬜
-Phase 7  Docker integration         ⬜
+Phase 7  Docker integration         ✅ done
 ```
 
 > Phases 5 and 6 can be parallelised once Phase 3 is done.
