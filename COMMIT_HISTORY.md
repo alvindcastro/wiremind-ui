@@ -2,6 +2,45 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - Fix ICMP Event Data Mapping (Phase 2/7)
+
+### Changes
+- Updated `src/pages/icmp/ICMPPage.tsx` to use nested `event` property for data mapping.
+- Added `Size (B)` column to the ICMP table.
+- Corrected "Invalid Date" issue caused by missing `event` prefix in `timestamp` accessor.
+
+### Documentation
+- **Task U2.8 (Correction)**: The ICMP backend response wraps event data in an `event` object. Updated the table accessors to use `event.timestamp`, `event.src_ip`, etc. This resolves the display of "Invalid Date" and empty columns.
+
+## [2026-04-04] - Fix API Client Base URL for v1 API (Phase 7)
+
+### Changes
+- Updated `src/api/client.ts` to use `/api/v1` as the default base URL.
+- Marked Task **U7.7** as completed in `PHASES.md` after resolving the 404 error.
+
+### Documentation
+- **Task U7.4 (Adjustment)**: Corrected the API client's base URL to include the `/v1` prefix required by the backend as defined in `openapi.yaml`. This fixes the 404 error on `/api/flows`.
+- **Verification**: Requests are now routed to `/api/v1/flows`, which matches the backend's routing group.
+
+## [2026-04-04] - Docker Compose Integration (Phase 7)
+
+### Changes
+- Defined `wiremind-ui` service in `wiremind/docker-compose.yaml` (sibling repository).
+- Configured the service to build from `../wiremind-ui`, expose port `3001`, and depend on the `forensics` backend.
+- Marked Task **U7.5** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U7.5**: Integrated the React UI into the main Docker Compose stack. This allows the entire platform (backend, database, and frontend) to be started with a single command.
+- **Verification Steps (U7.7)**:
+  1. **Build**: `docker compose build wiremind-ui` (from the `wiremind/` directory).
+  2. **Launch**: `docker compose up forensics postgres redis wiremind-ui`.
+  3. **Access**: Open `http://localhost:3001` in your browser.
+  4. **Test**:
+     - Confirm the Dashboard/Flows page loads live data (verifies Nginx API proxy).
+     - Check browser console for any CORS errors (there should be none).
+     - Refresh on a deep link (e.g., `/threats`) to verify SPA fallback.
+  5. **Stop**: `docker compose down`.
+
 ## [2026-04-04] - API Client Base URL Standardization (Phase 7)
 
 ### Changes

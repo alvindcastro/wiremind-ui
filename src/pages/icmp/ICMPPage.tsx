@@ -9,20 +9,20 @@ export default function ICMPPage() {
   const columns = useMemo<ColumnDef<any>[]>(
     () => [
       {
-        accessorKey: "timestamp",
+        accessorKey: "event.timestamp",
         header: "Timestamp",
         cell: (info) => new Date(info.getValue() as string).toLocaleString(),
       },
       {
-        accessorKey: "src_ip",
+        accessorKey: "event.src_ip",
         header: "Source IP",
       },
       {
-        accessorKey: "dst_ip",
+        accessorKey: "event.dst_ip",
         header: "Destination IP",
       },
       {
-        accessorKey: "type_name",
+        accessorKey: "event.type_name",
         header: "Type",
         cell: (info) => (
           <span className="font-mono text-xs uppercase text-slate-400">
@@ -31,8 +31,12 @@ export default function ICMPPage() {
         ),
       },
       {
-        accessorKey: "code",
+        accessorKey: "event.code",
         header: "Code",
+      },
+      {
+        accessorKey: "event.size",
+        header: "Size (B)",
       },
     ],
     []
