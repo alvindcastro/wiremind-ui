@@ -1,0 +1,12 @@
+node_modules
+dist
+.env*
+.git
+.gitignore
+.dockerignore
+README.md
+docs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store

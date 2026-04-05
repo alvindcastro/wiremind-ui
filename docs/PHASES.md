@@ -98,7 +98,7 @@ This file tracks the development progress of the Wiremind UI. Detailed specifica
 
 - [x] **U7.1** Create `Dockerfile` — multi-stage: `node:20-alpine` builder → `nginx:1.27-alpine` runtime
 - [x] **U7.2** Create `nginx.conf` — SPA fallback, `/api/` proxy to `forensics:8765`, gzip
-- [ ] **U7.3** Create `.dockerignore` — exclude `node_modules/`, `dist/`, `.env*`, `.git/`
+- [x] **U7.3** Create `.dockerignore` — exclude `node_modules/`, `dist/`, `.env*`, `.git/`
 - [ ] **U7.4** Verify `src/api/client.ts` uses relative `/api` base URL (works for both Vite proxy and nginx proxy)
 - [ ] **U7.5** Add `wiremind-ui` service to `wiremind/docker-compose.yaml`
 - [ ] **U7.6** Add `docker-compose.override.yaml` in `wiremind/` for local dev (expose backend port `8765` to host)

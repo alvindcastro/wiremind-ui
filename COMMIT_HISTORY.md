@@ -2,6 +2,22 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - Docker Build Optimization (Phase 7)
+
+### Changes
+- Created `.dockerignore` in the project root.
+- Excluded development-only files and directories:
+    - `node_modules/`
+    - `dist/`
+    - `.env*`
+    - `.git/`
+    - `docs/`
+- Marked Task **U7.3** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U7.3**: Configured Docker ignore rules to optimize the build context. This ensures only necessary source files are sent to the Docker daemon, reducing build time and preventing the inclusion of sensitive or redundant files in the image.
+- **Usage**: The `.dockerignore` file is automatically used by the `docker build` command.
+
 ## [2026-04-04] - Nginx Configuration & SPA Fallback (Phase 7)
 
 ### Changes
