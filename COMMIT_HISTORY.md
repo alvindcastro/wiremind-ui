@@ -2,6 +2,22 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - Nginx Configuration & SPA Fallback (Phase 7)
+
+### Changes
+- Created `nginx.conf` in the project root.
+- Configured Nginx with:
+    - **SPA Fallback**: `try_files $uri $uri/ /index.html` to support client-side routing.
+    - **API Proxy**: `/api/` requests are proxied to `http://forensics:8765/api/`.
+    - **OpenAPI Proxy**: `/openapi.yaml` is proxied to `http://forensics:8765/openapi.yaml`.
+    - **Gzip Compression**: Enabled for text, CSS, JS, JSON, and XML to improve performance.
+- Updated `Dockerfile` to copy `nginx.conf` into the Nginx configuration directory (`/etc/nginx/conf.d/default.conf`).
+- Marked Task **U7.2** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U7.2**: Nginx configuration for production deployment. This ensures the React SPA works correctly with deep links and can communicate with the backend service (`forensics`) within a Docker network.
+- **Usage**: The configuration is automatically included when building the Docker image.
+
 ## [2026-04-04] - Docker Implementation (Phase 7 Initial)
 
 ### Changes
