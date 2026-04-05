@@ -176,6 +176,14 @@ git branch -d feat/your-feature
 
 `git branch -d` deletes the local branch (safe — only works if the branch is already merged).
 
+> **Heads up:** `gh pr merge --delete-branch` sometimes switches to a stale local branch instead of `main`. If that happens, force-delete it:
+> ```bash
+> git checkout main
+> git branch -D stale-branch-name
+> git pull origin main
+> ```
+> `-D` force-deletes without checking merge status.
+
 ---
 
 ## Stashing uncommitted work
@@ -231,7 +239,8 @@ Active rules on `main`:
 | Force push safely | `git push --force-with-lease` |
 | Open PR | `gh pr create --title "..." --base main` |
 | Check CI status | `gh pr checks <pr-number>` |
-| Merge PR | `gh pr merge <pr-number> --squash --delete-branch` |
+| Merge PR (solo) | `gh pr merge <pr-number> --squash --delete-branch --admin` |
+| Force delete local branch | `git branch -D branch-name` |
 | Sync main | `git checkout main && git pull origin main` |
 | Delete local branch | `git branch -d feat/name` |
 | Stash changes | `git stash` / `git stash pop` |
