@@ -16,7 +16,7 @@ talks to the Go API over HTTP. It can be:
 
 - Run locally against a local `wiremind` stack
 - Served as a static build from any CDN or nginx
-- Added as a `ui` service in `docker-compose.yaml` later
+- Added as a `ui` service in `docker-compose.yaml` (Phase 7)
 
 ---
 
@@ -90,6 +90,9 @@ wiremind-ui/
 │   ├── App.tsx                  # router, QueryClientProvider
 │   └── main.tsx
 ├── public/
+├── nginx.conf                   # production nginx config (Phase 7)
+├── Dockerfile                   # multi-stage node → nginx (Phase 7)
+├── .dockerignore                # (Phase 7)
 ├── vite.config.ts               # dev proxy: /api → http://localhost:8765
 ├── tailwind.config.ts
 ├── components.json              # shadcn/ui config
@@ -134,35 +137,36 @@ CORS_ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3001
 
 ## Phase Breakdown
 
-### Phase 1 — Scaffold & Plumbing
+### Phase 1 — Scaffold & Plumbing ✅
 *Goal: empty app talking to the live API with correct types.*
 
-- [ ] **U1.1** Create `wiremind-ui` repo, init Vite + React + TypeScript
-- [ ] **U1.2** Install and configure Tailwind CSS + shadcn/ui (dark mode default)
-- [ ] **U1.3** Install `openapi-typescript` + `openapi-fetch`; add `generate:api` npm script pointing at `../wiremind/docs/openapi.yaml`
-- [ ] **U1.4** Run codegen; commit `src/api/schema.d.ts`
-- [ ] **U1.5** Write `src/api/client.ts` — `createClient<paths>` with base URL from `VITE_API_URL` env var
-- [ ] **U1.6** Configure Vite dev proxy: `/api → http://localhost:8765`, `/openapi.yaml → http://localhost:8765`
+- [x] **U1.1** Create `wiremind-ui` repo, init Vite + React + TypeScript
+- [x] **U1.2** Install and configure Tailwind CSS + shadcn/ui (dark mode default)
+- [x] **U1.3** Install `openapi-typescript` + `openapi-fetch`; add `generate:api` npm script pointing at `../wiremind/docs/openapi.yaml`
+- [x] **U1.4** Run codegen; commit `src/api/schema.d.ts`
+- [x] **U1.5** Write `src/api/client.ts` — `createClient<paths>` with base URL from `VITE_API_URL` env var
+- [x] **U1.6** Configure Vite dev proxy: `/api → http://localhost:8765`, `/openapi.yaml → http://localhost:8765`
 - [x] **U1.7** ~~Add CORS middleware to Go server~~ — already done in `internal/api/server.go`; add `http://localhost:5173` to `CORS_ALLOWED_ORIGINS` in `.env`
-- [ ] **U1.8** Install React Router v6; create Shell layout (sidebar + header + `<Outlet />`)
-- [ ] **U1.9** Add placeholder routes for all 10 pages; confirm navigation works
-- [ ] **U1.10** Add TanStack Query `QueryClientProvider` to `App.tsx`
+- [x] **U1.8** Install React Router v6; create Shell layout (sidebar + header + `<Outlet />`)
+- [x] **U1.9** Add placeholder routes for all 10 pages; confirm navigation works
+- [x] **U1.10** Add TanStack Query `QueryClientProvider` to `App.tsx`
+- [x] **U1.11** Configure `.gitignore` and project cleanup
 
 **Deliverable:** `npm run dev` → shell with nav. `curl /health` from browser network tab returns 200.
 
 ---
 
-### Phase 2 — Core Data Tables
+### Phase 2 — Core Data Tables ✅
 *Goal: all six data-view pages showing live data with column filters.*
 
-- [ ] **U2.1** Build generic `<DataTable>` component with TanStack Table (column def props, client-side filter, sort, pagination)
-- [ ] **U2.2** Add `<ThreatBadge score={n} />` component (0–33 green, 34–66 amber, 67–100 red)
-- [ ] **U2.3** **Flows page** — columns: flow_id, src_ip:port → dst_ip:port, protocol, packets, bytes, entropy, is_beacon, threat_score. Filter bar: src_ip, dst_ip, protocol, job_id
-- [ ] **U2.4** **Threats page** — reuse Flows table filtered to `is_malicious=true`, add IOC match detail in expandable row
-- [ ] **U2.5** **DNS page** — columns: timestamp, query name, qtype, rcode, answer count. Search bar for domain. Expandable row shows full answers + threat context
-- [ ] **U2.6** **TLS page** — columns: timestamp, SNI, version, cipher, is_malicious. Highlight weak ciphers (RC4/export) in amber. Search bar for SNI
-- [ ] **U2.7** **HTTP page** — columns: timestamp, method, host, path, user_agent, status_code. Highlight CLI agents. Search bar for host
-- [ ] **U2.8** **ICMP page** — columns: timestamp, src_ip, dst_ip, type_name, code, size
+- [x] **U2.1** Build generic `<DataTable>` component with TanStack Table (column def props, client-side filter, sort, pagination)
+- [x] **U2.2** Add `<ThreatBadge score={n} />` component (0–33 green, 34–66 amber, 67–100 red)
+- [x] **U2.3** **Flows page** — columns: flow_id, src_ip:port → dst_ip:port, protocol, packets, bytes, entropy, is_beacon, threat_score. Filter bar: src_ip, dst_ip, protocol, job_id
+- [x] **U2.4** **Threats page** — reuse Flows table filtered to `is_malicious=true`, add IOC match detail in expandable row
+- [x] **U2.5** **DNS page** — columns: timestamp, query name, qtype, rcode, answer count. Search bar for domain. Expandable row shows full answers + threat context
+- [x] **U2.6** **TLS page** — columns: timestamp, SNI, version, cipher, is_malicious. Highlight weak ciphers (RC4/export) in amber. Search bar for SNI
+- [x] **U2.7** **HTTP page** — columns: timestamp, method, host, path, user_agent, status_code. Highlight CLI agents. Search bar for host
+- [x] **U2.8** **ICMP page** — columns: timestamp, src_ip, dst_ip, type_name, code, size
 
 **Deliverable:** All six tables populated with real data. Filters working.
 
@@ -200,9 +204,9 @@ CORS_ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3001
 
 - [ ] **U5.1** Install `cytoscape` + `react-cytoscapejs`
 - [ ] **U5.2** Build `<NetworkGraph>` component — transform `EnrichedFlow[]` into Cytoscape node/edge format
-  - Node = IP address; edge = flow (directed)
-  - Node colour: red=malicious, amber=suspicious (score>33), grey=clean
-  - Edge width proportional to byte_count
+    - Node = IP address; edge = flow (directed)
+    - Node colour: red=malicious, amber=suspicious (score>33), grey=clean
+    - Edge width proportional to byte_count
 - [ ] **U5.3** Layout: `cose-bilkent` for organic force-directed layout (install `cytoscape-cose-bilkent`)
 - [ ] **U5.4** Click a node → side panel showing all flows for that IP, GeoIP info, IOC matches
 - [ ] **U5.5** Filter controls: show only malicious, show only beaconing, filter by job_id
@@ -225,6 +229,78 @@ CORS_ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3001
 
 ---
 
+### Phase 7 — Docker Integration (Option B)
+*Goal: `docker compose up` boots the full stack including the React UI served via nginx. One command, everything running.*
+
+#### Architecture
+```
+Browser → nginx :3001
+              ├─ /          → serves dist/ (React SPA, with SPA fallback)
+              └─ /api/      → proxy_pass http://forensics:8765/
+```
+
+nginx proxies `/api` internally — the browser sees one origin, so no CORS headers
+are needed in production. Dev workflow (`npm run dev` + Vite proxy) is unchanged.
+
+#### Repo layout
+```
+~/GolandProjects/
+  wiremind/          ← Go backend (docker-compose lives here)
+  wiremind-ui/       ← React frontend (docker-compose references ../wiremind-ui)
+```
+
+#### Tasks
+
+- [ ] **U7.1** `wiremind-ui`: Create `Dockerfile` (multi-stage)
+    - Stage 1 (`builder`): `node:20-alpine`, copy `package*.json`, `npm ci`, `npm run build`
+    - Stage 2 (`runtime`): `nginx:1.27-alpine`, copy `dist/` to `/usr/share/nginx/html`
+    - Copy `nginx.conf` into image at `/etc/nginx/conf.d/default.conf`
+    - Expose port 80
+
+- [ ] **U7.2** `wiremind-ui`: Create `nginx.conf`
+    - Serve `dist/` as document root
+    - `try_files $uri $uri/ /index.html` — enables React Router deep links
+    - `location /api/ { proxy_pass http://forensics:8765/; }` — strip prefix via trailing slash
+    - Proxy headers: `Host`, `X-Real-IP`, `X-Forwarded-For`
+    - Gzip: `js`, `css`, `html`, `svg`
+
+- [ ] **U7.3** `wiremind-ui`: Create `.dockerignore`
+    - Ignore: `node_modules/`, `dist/`, `.env*`, `.git/`, `*.md`
+
+- [ ] **U7.4** `wiremind-ui`: Verify API client base URL
+    - Confirm `src/api/client.ts` uses `/api` (relative) — not hard-coded `localhost:8765`
+    - Both Vite proxy (dev) and nginx proxy (Docker) route `/api/*` to the backend — no env var needed
+
+- [ ] **U7.5** `wiremind`: Add `wiremind-ui` service to `docker-compose.yaml`
+  ```yaml
+  wiremind-ui:
+    build:
+      context: ../wiremind-ui
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    depends_on:
+      forensics:
+        condition: service_started
+  ```
+
+- [ ] **U7.6** `wiremind`: Add `docker-compose.override.yaml` for local dev
+    - Override `forensics` to expose port `8765` to the host so `npm run dev` Vite proxy still works
+    - Keeps main `docker-compose.yaml` clean (no host-exposed backend port in prod-like mode)
+
+- [ ] **U7.7** Smoke test
+    - [ ] `docker compose build wiremind-ui` — build succeeds, image < 50 MB
+    - [ ] `docker compose up forensics postgres redis wiremind-ui`
+    - [ ] `http://localhost:3001` — UI loads, no blank screen
+    - [ ] Navigate to Flows page — live data from API renders
+    - [ ] No CORS errors in browser DevTools console
+    - [ ] Direct URL to `/threats` works (React Router deep link via nginx fallback)
+    - [ ] `docker compose down` — clean shutdown
+
+**Deliverable:** `docker compose up` → full stack at `localhost:3001`. No manual steps.
+
+---
+
 ## IDE Setup (WebStorm)
 
 1. Open `wiremind-ui/` as the project root in WebStorm
@@ -237,27 +313,6 @@ CORS_ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3001
 **Monorepo workspace tip:** In WebStorm, use *File → Open* on the parent directory
 (`GolandProjects/`). Then right-click `wiremind-ui/` and "Attach" — you get both
 repos in one window, GoLand for Go and WebStorm for the frontend.
-
----
-
-## docker-compose Integration (Phase 1+)
-
-Add to `docker-compose.yaml` once Phase 2 is working:
-
-```yaml
-  ui:
-    build:
-      context: ../wiremind-ui     # or embed in mono-repo under ui/
-      dockerfile: Dockerfile
-    ports:
-      - "3001:80"                 # nginx serving the static build
-    environment:
-      - VITE_API_URL=http://forensics:8765
-    depends_on:
-      - forensics
-```
-
-The UI Dockerfile is a two-stage build (node:20 → nginx:alpine).
 
 ---
 
@@ -290,15 +345,17 @@ Add to `package.json`:
 ## Prioritised Build Order
 
 ```
-Phase 1  Scaffold + CORS fix      → unblocks everything
-Phase 2  Core tables              → main daily-use views
-Phase 3  Job management + SSE     → closes the submit→watch→query loop
-Phase 4  Dashboard                → overview, polish
-Phase 5  Network graph            → high-value differentiator
-Phase 6  Config & control         → IOC management, live capture
+Phase 1  Scaffold + CORS fix        ✅ done
+Phase 2  Core tables                ✅ done
+Phase 3  Job management + SSE       → closes the submit→watch→query loop
+Phase 4  Dashboard                  → overview, polish
+Phase 5  Network graph              → high-value differentiator
+Phase 6  Config & control           → IOC management, live capture
+Phase 7  Docker integration         → one-command full stack deploy
 ```
 
-Phases 5 and 6 can be parallelised once Phase 2 is done.
+Phases 5 and 6 can be parallelised once Phase 3 is done.
+Phase 7 can be done any time after Phase 2 — it's infrastructure, not features.
 
 ---
 
@@ -306,9 +363,10 @@ Phases 5 and 6 can be parallelised once Phase 2 is done.
 
 | Phase | Smoke test |
 |---|---|
-| 1 | `npm run dev` → app loads. `/health` returns 200 in browser network tab. No CORS errors |
-| 2 | All six table pages load with live data. Filtering by `src_ip` narrows rows correctly |
+| 1 ✅ | `npm run dev` → app loads. `/health` returns 200 in browser network tab. No CORS errors |
+| 2 ✅ | All six table pages load with live data. Filtering by `src_ip` narrows rows correctly |
 | 3 | Submit a PCAP path → status transitions `pending → processing → completed` in real time |
 | 4 | Dashboard stats match values from `curl /api/v1/stats` |
 | 5 | Graph renders for a parsed PCAP with >10 flows. Malicious node is red |
 | 6 | Add IOC → appears in Go server's in-memory matcher (verify via `/api/v1/config/ioc`) |
+| 7 | `docker compose up` → UI at `localhost:3001`, live data, no CORS errors, deep links work |
