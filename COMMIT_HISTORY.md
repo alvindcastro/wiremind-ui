@@ -2,6 +2,16 @@
 
 This file acts as a log of code changes and pseudo-documentation for the `wiremind-ui` project.
 
+## [2026-04-04] - API Client Base URL Standardization (Phase 7)
+
+### Changes
+- Updated `src/api/client.ts` to use `/api` as the default base URL.
+- Marked Task **U7.4** as completed in `PHASES.md`.
+
+### Documentation
+- **Task U7.4**: Standardized the API client's base URL to use a relative path (`/api`). This ensures compatibility with both the Vite development proxy and the Nginx production proxy without requiring environment-specific hardcoded URLs.
+- **Usage**: The `client` now defaults to `/api`, which is correctly routed in all deployment scenarios.
+
 ## [2026-04-04] - Docker Build Optimization (Phase 7)
 
 ### Changes
